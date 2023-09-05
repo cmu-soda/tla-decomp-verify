@@ -4,8 +4,8 @@ import shutil
 import subprocess
 import sys
 
-tool = "/Users/idardik/Documents/CMU/tla-robustness-src/bin/tlc-ian.jar"
-#tool = "/Users/idardik/Documents/CMU/tla-decomp-verif/tla-robustness-src/bin/tlc-ian.jar"
+root_dir = os.path.dirname(os.path.abspath(__file__))
+tool = root_dir + "/bin/tlc-ian.jar"
 
 def write(name, contents):
     f = open(name, "w")
