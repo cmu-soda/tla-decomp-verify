@@ -6,17 +6,42 @@ import sys
 
 root_dir = os.path.dirname(os.path.abspath(__file__))
 tool = root_dir + "/bin/tlc-ian.jar"
+tlc = "/Users/idardik/bin/tla2tools.jar"
 
 def write(name, contents):
     f = open(name, "w")
     f.write(contents)
     f.close()
 
+def create_err_trace(txt):
+    lines = txt.split("\n")
+    keep = []
+    capture = False
+    for l in lines:
+        if ("Error:" in l):
+            capture = True
+        if ("distinct states found" in l):
+            capture = False
+        if (capture and "errCounter" not in l):
+            keep.append(l)
+    return "\n".join(keep)
+
 def verify(spec, cfg):
     # run model checking alg
-    # subprocess.call is like unix's exec
+    # use subprocess.call to send the output to stdout
     cmd_args = ["java", "-Xmx25g", "-jar", tool, "--verif", spec, cfg]
-    subprocess.call(cmd_args)
+    retcode = subprocess.call(cmd_args)
+
+    if (retcode == 99):
+        replay_args = ["java", "-jar", tlc, "-deadlock", "ErrTrace.tla"]
+        replay = subprocess.run(replay_args, capture_output=True, text=True)
+        replay_out = replay.stdout
+        if ("Error:" in replay_out):
+            err_trace = create_err_trace(replay_out)
+            print("Here is the error trace:\n")
+            print(err_trace)
+        else:
+            print("The violation is a false alarm. Verification is inconclusive.")
 
 def run():
     if (len(sys.argv) != 3):
