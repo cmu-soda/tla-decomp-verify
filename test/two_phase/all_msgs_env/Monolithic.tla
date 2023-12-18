@@ -77,7 +77,7 @@ Next ==
 Spec == Init /\ [][Next]_vars
 
 TypeOK ==
-  /\ msgs \subseteq Message
+  /\ msgs \in SUBSET Message
   /\ rmState \in [RMs -> {"working", "prepared", "committed", "aborted"}]
   /\ tmState \in {"init", "committed", "aborted"}
   /\ tmPrepared \in SUBSET RMs

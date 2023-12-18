@@ -108,13 +108,12 @@ Phase1a(b) == /\ Send([type |-> "1a", bal |-> b])
 (* b and sends a phase 1b message to the leader containing the values of   *)
 (* maxVBal[a] and maxVal[a].                                               *)
 (***************************************************************************)
-Phase1b(a) == /\ \E m \in msgs : 
-                  /\ m.type = "1a"
-                  /\ m.bal > maxBal[a]
-                  /\ maxBal' = [maxBal EXCEPT ![a] = m.bal]
-                  /\ Send([type |-> "1b", acc |-> a, bal |-> m.bal, 
-                            mbal |-> maxVBal[a], mval |-> maxVal[a]])
-              /\ UNCHANGED <<maxVBal, maxVal>>
+Phase1b(a,m) == /\ m.type = "1a"
+                /\ m.bal > maxBal[a]
+                /\ maxBal' = [maxBal EXCEPT ![a] = m.bal]
+                /\ Send([type |-> "1b", acc |-> a, bal |-> m.bal, 
+                          mbal |-> maxVBal[a], mval |-> maxVal[a]])
+                /\ UNCHANGED <<maxVBal, maxVal>>
 
 (***************************************************************************)
 (* The Phase2a(b, v) action can be performed by the ballot b leader if two *)
@@ -143,14 +142,13 @@ Q1b(Q, b) ==
 
 Q1bv(Q, b) == {m \in Q1b(Q,b) : m.mbal \geq 0}
     
-Phase2a(b, v) ==
+Phase2a(b, v, Q) ==
   /\ ~ \E m \in msgs : m.type = "2a" /\ m.bal = b
-  /\ \E Q \in Quorum :
-        /\ \A a \in Q : \E m \in Q1b(Q,b) : m.acc = a 
-        /\ \/ Q1bv(Q, b) = {}
-           \/ \E m \in Q1bv(Q, b) : 
-                /\ m.mval = v
-                /\ \A mm \in Q1bv(Q, b) : m.mbal \geq mm.mbal 
+  /\ \A a \in Q : \E m \in Q1b(Q,b) : m.acc = a 
+  /\ \/ Q1bv(Q, b) = {}
+     \/ \E m \in Q1bv(Q, b) : 
+          /\ m.mval = v
+          /\ \A mm \in Q1bv(Q, b) : m.mbal \geq mm.mbal 
   /\ Send([type |-> "2a", bal |-> b, val |-> v])
   /\ UNCHANGED <<maxBal, maxVBal, maxVal>>
   
@@ -163,13 +161,13 @@ Phase2a(b, v) ==
 (* phase 2b message announcing its vote.  It also sets maxBal[a] to the    *)
 (* message's.  ballot number                                               *)
 (***************************************************************************)
-Phase2b(a) == \E m \in msgs : /\ m.type = "2a"
-                              /\ m.bal \geq maxBal[a]
-                              /\ maxBal' = [maxBal EXCEPT ![a] = m.bal] 
-                              /\ maxVBal' = [maxVBal EXCEPT ![a] = m.bal] 
-                              /\ maxVal' = [maxVal EXCEPT ![a] = m.val]
-                              /\ Send([type |-> "2b", acc |-> a,
-                                       bal |-> m.bal, val |-> m.val]) 
+Phase2b(a,m) == /\ m.type = "2a"
+                /\ m.bal \geq maxBal[a]
+                /\ maxBal' = [maxBal EXCEPT ![a] = m.bal] 
+                /\ maxVBal' = [maxVBal EXCEPT ![a] = m.bal] 
+                /\ maxVal' = [maxVal EXCEPT ![a] = m.val]
+                /\ Send([type |-> "2b", acc |-> a,
+                         bal |-> m.bal, val |-> m.val]) 
 
 (***************************************************************************)
 (* In an implementation, there will be learner processes that learn from   *)
@@ -180,11 +178,11 @@ Phase2b(a) == \E m \in msgs : /\ m.type = "2a"
 (***************************************************************************)
 (* Below are defined the next-state action and the complete spec.          *)
 (***************************************************************************)
-Next == 
+Next ==
     \/ \E b \in Ballot : Phase1a(b)
-    \/ \E b \in Ballot : \E v \in Value : Phase2a(b, v)
-    \/ \E a \in Acceptor : Phase1b(a) 
-    \/ \E a \in Acceptor : Phase2b(a)
+    \/ \E b \in Ballot : \E v \in Value : \E Q \in Quorum : Phase2a(b, v, Q)
+    \/ \E a \in Acceptor : \E m \in msgs : Phase1b(a,m)
+    \/ \E a \in Acceptor : \E m \in msgs : Phase2b(a,m)
 
 Spec == Init /\ [][Next]_vars
 ----------------------------------------------------------------------------

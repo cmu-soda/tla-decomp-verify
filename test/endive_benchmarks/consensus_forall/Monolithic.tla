@@ -3,7 +3,9 @@
 
 EXTENDS TLC, Naturals, FiniteSets
 
-Node == {"n1","n2","n3"}
+\*Node == {"n1","n2"}
+\*Node == {"n1","n2","n3"}
+Node == {"n1","n2","n3","n4"}
 Value == {"v1","v2","v3","v4"}
 Quorum == { S \in SUBSET Node : Cardinality(S)*2 > Cardinality(Node) }
 
@@ -60,20 +62,13 @@ Init ==
     /\ voting_quorum \in Quorum
     /\ decided = {}
 
-SendRequestVoteAction == \E i,j \in Node : SendRequestVote(i,j)
-SendVoteAction == \E i,j \in Node : SendVote(i,j)
-RecvVoteAction == \E i,j \in Node : RecvVote(i,j)
-ChooseVotingQuorumAction == \E i \in Node : \E Q \in Quorum : ChooseVotingQuorum(i,Q)
-BecomeLeaderAction == \E i \in Node : BecomeLeader(i)
-DecideAction == \E i \in Node, v \in Value : Decide(i, v)
-
 Next ==
-    \/ SendRequestVoteAction
-    \/ SendVoteAction
-    \/ RecvVoteAction
-    \/ ChooseVotingQuorumAction
-    \/ BecomeLeaderAction
-    \/ DecideAction
+    \/ \E i,j \in Node : SendRequestVote(i,j)
+    \/ \E i,j \in Node : SendVote(i,j)
+    \/ \E i,j \in Node : RecvVote(i,j)
+    \/ \E i \in Node : \E Q \in Quorum : ChooseVotingQuorum(i,Q)
+    \/ \E i \in Node : BecomeLeader(i)
+    \/ \E i \in Node, v \in Value : Decide(i, v)
 
 Spec == Init /\ [][Next]_vars
 

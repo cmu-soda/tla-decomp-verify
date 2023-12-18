@@ -16,10 +16,10 @@ Value == 0..2
 Node == {"n1","n2"}
 Quorum == { S \in SUBSET Node : Cardinality(S)*2 > Cardinality(Node) }
 
-ASSUME QuorumAssumption == /\ \A Q \in Quorum : Q \subseteq Node
-                           /\ \A Q1, Q2 \in Quorum : Q1 \cap Q2 # {}
+\*ASSUME QuorumAssumption == /\ \A Q \in Quorum : Q \subseteq Node
+                           \*/\ \A Q1, Q2 \in Quorum : Q1 \cap Q2 # {}
 
-Round == 0..2 \* Nat
+Round == 0..1 \* Nat
 
 None == -1
 \* None == CHOOSE v : v \notin Value

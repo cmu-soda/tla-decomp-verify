@@ -6,7 +6,7 @@ import sys
 
 root_dir = os.path.dirname(os.path.abspath(__file__))
 tool = root_dir + "/bin/tlc-ian.jar"
-tlc = "/Users/idardik/bin/tla2tools.jar"
+tlc = root_dir + "/bin/tla2tools.jar"
 
 def write(name, contents):
     f = open(name, "w")
@@ -26,10 +26,12 @@ def create_err_trace(txt):
             keep.append(l)
     return "\n".join(keep)
 
-def verify(spec, cfg):
+def verify(spec, cfg, cust):
     # run model checking alg
     # use subprocess.call to send the output to stdout
     cmd_args = ["java", "-Xmx25g", "-jar", tool, "--verif", spec, cfg]
+    if cust:
+        cmd_args.append("--sc")
     retcode = subprocess.call(cmd_args)
 
     if (retcode == 99):
@@ -44,12 +46,16 @@ def verify(spec, cfg):
             print("The violation is a false alarm. Verification is inconclusive.")
 
 def run():
-    if (len(sys.argv) != 3):
-        print("usage: verify.py <file.tla> <file.cfg>")
+    if (len(sys.argv) < 3 or len(sys.argv) > 4):
+        print("usage: verify.py [--cust] <file.tla> <file.cfg>")
+        return
+    if (len(sys.argv) == 4 and sys.argv[3] != "--cust"):
+        print("usage: verify.py [--cust] <file.tla> <file.cfg>")
         return
 
     spec = sys.argv[1]
     cfg = sys.argv[2]
+    cust = len(sys.argv) == 4 and sys.argv[3] == "--cust"
 
     orig_dir = os.getcwd()
     os.makedirs("out", exist_ok=True)
@@ -61,7 +67,7 @@ def run():
         shutil.copy(filename, dest_dir)
 
     os.chdir("out")
-    verify(spec, cfg)
+    verify(spec, cfg, cust)
     os.chdir(orig_dir)
 
 run()
