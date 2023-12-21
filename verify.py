@@ -43,7 +43,7 @@ def verify(spec, cfg, cust):
             print("Here is the error trace:\n")
             print(err_trace)
         else:
-            print("The violation is a false alarm. Verification is inconclusive.")
+            print("Could not confirm the violating trace in the TLA+ spec; this is a bug in the tool.")
 
 def run():
     if (len(sys.argv) < 3 or len(sys.argv) > 4):
