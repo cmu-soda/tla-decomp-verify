@@ -26,12 +26,14 @@ def create_err_trace(txt):
             keep.append(l)
     return "\n".join(keep)
 
-def verify(spec, cfg, cust):
+def verify(spec, cfg, cust, naive):
     # run model checking alg
     # use subprocess.call to send the output to stdout
     cmd_args = ["java", "-Xmx25g", "-jar", tool, "--verif", spec, cfg]
     if cust:
         cmd_args.append("--sc")
+    if naive:
+        cmd_args.append("--naive")
     retcode = subprocess.call(cmd_args)
 
     if (retcode == 99):
@@ -49,13 +51,14 @@ def run():
     if (len(sys.argv) < 3 or len(sys.argv) > 4):
         print("usage: verify.py [--cust] <file.tla> <file.cfg>")
         return
-    if (len(sys.argv) == 4 and sys.argv[3] != "--cust"):
-        print("usage: verify.py [--cust] <file.tla> <file.cfg>")
+    if (len(sys.argv) == 4 and sys.argv[3] != "--cust" and sys.argv[3] != "--naive"):
+        print("usage: verify.py <file.tla> <file.cfg> [--cust|--naive]")
         return
 
     spec = sys.argv[1]
     cfg = sys.argv[2]
     cust = len(sys.argv) == 4 and sys.argv[3] == "--cust"
+    naive = len(sys.argv) == 4 and sys.argv[3] == "--naive"
 
     orig_dir = os.getcwd()
     os.makedirs("out", exist_ok=True)
@@ -67,7 +70,7 @@ def run():
         shutil.copy(filename, dest_dir)
 
     os.chdir("out")
-    verify(spec, cfg, cust)
+    verify(spec, cfg, cust, naive)
     os.chdir(orig_dir)
 
 run()
