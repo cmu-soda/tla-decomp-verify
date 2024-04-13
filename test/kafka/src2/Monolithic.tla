@@ -48,13 +48,12 @@ Consume(consumer, partition, event) ==
         consume_partition |-> partition,
         consume_event |-> event,
         consume_time |-> time] IN
-    LET last_read_idx == offsets[consumer][partition] IN
     LET offset_func == offsets[consumer] IN
     /\ Len(partition_contents[partition]) > 0
-    /\ Len(partition_contents[partition]) > last_read_idx
+    /\ Len(partition_contents[partition]) > offsets[consumer][partition]
     /\ time < MaxTime
-    /\ event = partition_contents[partition][last_read_idx + 1]
-    /\ offsets' = [offsets EXCEPT ![consumer] = [offset_func EXCEPT ![partition] = last_read_idx + 1]]
+    /\ event = partition_contents[partition][offsets[consumer][partition] + 1]
+    /\ offsets' = [offsets EXCEPT ![consumer] = [offset_func EXCEPT ![partition] = offsets[consumer][partition] + 1]]
     /\ consume_actions' = consume_actions \cup {curr_action}
     /\ time' = time + 1
     /\ UNCHANGED <<partition_contents, produce_actions>>

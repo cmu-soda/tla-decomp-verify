@@ -2,88 +2,68 @@
 
 EXTENDS Sequences, Naturals, Integers
 
-VARIABLES queue, rmState, tmState, tmPrepared, dummy
+VARIABLES msgs, rmState, tmState, tmPrepared, counter
 
-vars == <<queue, rmState, tmState, tmPrepared, dummy>>
+vars == <<msgs, rmState, tmState, tmPrepared, counter>>
 
-RMs == {"rm1", "rm2"}
+RMs == {"rm1", "rm2", "rm3", "rm4", "rm5", "rm6", "rm7", "rm8", "rm9"}
 msg == "msg"
 theRM == "theRM"
-maxLen == 5
+
+Message ==
+  [type : {"Prepared"}, rm : RMs]  \cup  [type : {"Commit", "Abort"}]
 
 
 Init ==   
-  /\ queue = <<>>
+  /\ msgs = {}
   /\ rmState = [rm \in RMs |-> "working"]
   /\ tmState = "init"
   /\ tmPrepared = {}
-  /\ dummy = 0
+  /\ counter = 0
 
 SndPrepare(rm) == 
-  LET data == [msg |-> "prepare", theRM |-> rm] IN
-  /\ Len(queue) < maxLen
-  /\ queue' = Append(queue, data)
+  /\ msgs' = msgs \cup {[type |-> "Prepared", theRM |-> rm]}
   /\ rmState[rm] = "working"
   /\ rmState' = [rmState EXCEPT![rm] = "prepared"]
-  /\ UNCHANGED <<tmState, tmPrepared, dummy>>
+  /\ UNCHANGED <<tmState, tmPrepared, counter>>
 
 RcvPrepare(rm) ==
-  LET hd == Head(queue)
-      tl == Tail(queue) IN
-  /\ Len(queue) > 0
-  /\ "prepare" = hd[msg]
-  /\ rm = hd[theRM]
-  /\ queue' = tl
+  /\ [type |-> "Prepared", theRM |-> rm] \in msgs
   /\ tmState = "init"
   /\ tmPrepared' = tmPrepared \cup {rm}
-  /\ UNCHANGED <<tmState, rmState, dummy>>
+  /\ UNCHANGED <<msgs, tmState, rmState, counter>>
 
 SndCommit(rm) ==
-  LET data == [msg |-> "commit", theRM |-> rm] IN
-  /\ Len(queue) < maxLen
-  /\ queue' = Append(queue, data)
+  /\ msgs' = msgs \cup {[type |-> "Commit"]}
   /\ tmState \in {"init", "commmitted"}
   /\ tmPrepared = RMs
   /\ tmState' = "committed"
-  /\ UNCHANGED <<tmPrepared, rmState, dummy>>
+  /\ UNCHANGED <<tmPrepared, rmState, counter>>
 
 RcvCommit(rm) ==
-  LET hd == Head(queue)
-      tl == Tail(queue) IN
-  /\ Len(queue) > 0
-  /\ "commit" = hd[msg]
-  /\ rm = hd[theRM]
-  /\ queue' = tl
+  /\ [type |-> "Commit"] \in msgs
   /\ rmState' = [rmState EXCEPT![rm] = "committed"]
-  /\ UNCHANGED <<tmState, tmPrepared, dummy>>
+  /\ UNCHANGED <<msgs, tmState, tmPrepared, counter>>
 
 SndAbort(rm) ==
-  LET data == [msg |-> "abort", theRM |-> rm] IN
-  \* must restrict the length here since TM can abort endlessly
-  /\ Len(queue) < maxLen
-  /\ queue' = Append(queue, data)
+  /\ msgs' = msgs \cup {[type |-> "Abort"]}
   /\ tmState \in {"init", "aborted"}
   /\ tmState' = "aborted"
-  /\ UNCHANGED <<tmPrepared, rmState, dummy>>
+  /\ UNCHANGED <<tmPrepared, rmState, counter>>
 
 RcvAbort(rm) ==
-  LET hd == Head(queue)
-      tl == Tail(queue) IN
-  /\ Len(queue) > 0
-  /\ "abort" = hd[msg]
-  /\ rm = hd[theRM]
-  /\ queue' = tl
+  /\ [type |-> "Abort"] \in msgs
   /\ rmState' = [rmState EXCEPT![rm] = "aborted"]
-  /\ UNCHANGED <<tmState, tmPrepared, dummy>>
+  /\ UNCHANGED <<msgs, tmState, tmPrepared, counter>>
   
 SilentAbort(rm) ==
   /\ rmState[rm] = "working"
   /\ rmState' = [rmState EXCEPT![rm] = "aborted"]
-  /\ UNCHANGED <<tmState, tmPrepared, queue, dummy>>
+  /\ UNCHANGED <<tmState, tmPrepared, msgs, counter>>
   
-Dummy ==
-  /\ dummy' = dummy + 1
-  /\ UNCHANGED <<rmState, tmState, tmPrepared, queue>>
+Increment ==
+  /\ counter' = counter + 1
+  /\ UNCHANGED <<rmState, tmState, tmPrepared, msgs>>
 
 
 Next ==
@@ -95,16 +75,16 @@ Next ==
         \/ SndAbort(rm)
         \/ RcvAbort(rm)
         \/ SilentAbort(rm)
-        \/ Dummy
+        \/ Increment
 
 Spec == Init /\ [][Next]_vars
 
 TypeOK ==
-  /\ queue \in Seq([msg : {"prepare","commit","abort"}, theRM : RMs])
+  /\ msgs \in SUBSET Message
   /\ rmState \in [RMs -> {"working", "prepared", "committed", "aborted"}]
   /\ tmState \in {"init", "committed", "aborted"}
   /\ tmPrepared \in SUBSET RMs
-  /\ dummy \in Nat
+  /\ counter \in Nat
 
 Consistent == \A rm1,rm2 \in RMs : ~(rmState[rm1] = "aborted" /\ rmState[rm2] = "committed")
 

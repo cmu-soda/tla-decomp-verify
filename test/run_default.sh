@@ -17,7 +17,7 @@ dirs=("two_phase/all_msgs_env/two_phase_9"
 for d in ${dirs[*]}
 do
     pushd "$d"
-    ./default.sh
+    timeout --foreground 10m ./default.sh
     popd
-    echo "\n"
+    echo "\n\n"
 done

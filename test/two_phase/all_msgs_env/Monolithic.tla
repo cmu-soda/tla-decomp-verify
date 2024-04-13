@@ -8,13 +8,14 @@ vars == <<msgs, rmState, tmState, tmPrepared>>
 
 \*RMs == {"rm1", "rm2"}
 \*RMs == {"rm1", "rm2", "rm3", "rm4", "rm5", "rm6"}
-RMs == {"rm1", "rm2", "rm3", "rm4", "rm5", "rm6", "rm7", "rm8", "rm9"}
+RMs == {"rm1", "rm2", "rm3", "rm4", "rm5", "rm6", "rm7", "rm8"}
+\*RMs == {"rm1", "rm2", "rm3", "rm4", "rm5", "rm6", "rm7", "rm8", "rm9"}
 \*RMs == {"rm1", "rm2", "rm3", "rm4", "rm5", "rm6", "rm7", "rm8", "rm9", "rm10"}
 msg == "msg"
 theRM == "theRM"
 
 Message ==
-  [type : {"Prepared"}, rm : RMs]  \cup  [type : {"Commit", "Abort"}]
+  [type : {"Prepared"}, theRM : RMs]  \cup  [type : {"Commit", "Abort"}]
 
 
 Init ==   

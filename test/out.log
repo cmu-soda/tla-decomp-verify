@@ -1,0 +1,1379 @@
+~/Documents/CMU/tla-decomp-verify/test/two_phase/all_msgs_env/two_phase_9 ~/Documents/CMU/tla-decomp-verify/test
+Two Phase Commit (9) (Bug)
+n: 4
+m: 3
+
+Component 1: D0
+State space gen: 3257ms
+LTS gen: 176ms
+# unique states: 78732 states
+minimization: 1240ms
+# unique states post-minimization: 513 states
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+
+Component 2: D1
+State space gen: 673ms
+LTS gen: 21ms
+# unique states: 2048 states
+minimization: 181ms
+# unique states post-minimization: 2048 states
+New property gen (|| composition): 1728ms
+
+Component 3: D2
+State space gen: 17ms
+LTS gen: 0ms
+# unique states: 3 states
+minimization: 0ms
+# unique states post-minimization: 3 states
+New property gen (|| composition): 816ms
+
+Component 4: E2
+State space gen: 32ms
+LTS gen: 1ms
+# unique states: 512 states
+minimization: 7ms
+# unique states post-minimization: 512 states
+New property gen (|| composition): 6417ms
+
+Total # states checked: 81295
+Property may be violated.
+Here is the error trace:
+
+Error: Invariant Consistent is violated.
+Error: The behavior up to this point is:
+State 1: <Initial predicate>
+/\ msgs = {}
+/\ rmState = [ rm1 |-> "working",
+  rm2 |-> "working",
+  rm3 |-> "working",
+  rm4 |-> "working",
+  rm5 |-> "working",
+  rm6 |-> "working",
+  rm7 |-> "working",
+  rm8 |-> "working",
+  rm9 |-> "working" ]
+/\ tmState = "init"
+/\ tmPrepared = {}
+
+State 2: <ErrNext line 89, col 5 to line 111, col 33 of module ErrTrace>
+/\ msgs = {[theRM |-> "rm1", type |-> "Prepared"]}
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "working",
+  rm3 |-> "working",
+  rm4 |-> "working",
+  rm5 |-> "working",
+  rm6 |-> "working",
+  rm7 |-> "working",
+  rm8 |-> "working",
+  rm9 |-> "working" ]
+/\ tmState = "init"
+/\ tmPrepared = {}
+
+State 3: <ErrNext line 89, col 5 to line 111, col 33 of module ErrTrace>
+/\ msgs = {[theRM |-> "rm1", type |-> "Prepared"]}
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "working",
+  rm3 |-> "working",
+  rm4 |-> "working",
+  rm5 |-> "working",
+  rm6 |-> "working",
+  rm7 |-> "working",
+  rm8 |-> "working",
+  rm9 |-> "working" ]
+/\ tmState = "init"
+/\ tmPrepared = {"rm1"}
+
+State 4: <ErrNext line 89, col 5 to line 111, col 33 of module ErrTrace>
+/\ msgs = {[theRM |-> "rm1", type |-> "Prepared"], [theRM |-> "rm2", type |-> "Prepared"]}
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "working",
+  rm4 |-> "working",
+  rm5 |-> "working",
+  rm6 |-> "working",
+  rm7 |-> "working",
+  rm8 |-> "working",
+  rm9 |-> "working" ]
+/\ tmState = "init"
+/\ tmPrepared = {"rm1"}
+
+State 5: <ErrNext line 89, col 5 to line 111, col 33 of module ErrTrace>
+/\ msgs = {[theRM |-> "rm1", type |-> "Prepared"], [theRM |-> "rm2", type |-> "Prepared"]}
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "working",
+  rm4 |-> "working",
+  rm5 |-> "working",
+  rm6 |-> "working",
+  rm7 |-> "working",
+  rm8 |-> "working",
+  rm9 |-> "working" ]
+/\ tmState = "init"
+/\ tmPrepared = {"rm1", "rm2"}
+
+State 6: <ErrNext line 89, col 5 to line 111, col 33 of module ErrTrace>
+/\ msgs = { [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "working",
+  rm4 |-> "working",
+  rm5 |-> "working",
+  rm6 |-> "working",
+  rm7 |-> "prepared",
+  rm8 |-> "working",
+  rm9 |-> "working" ]
+/\ tmState = "init"
+/\ tmPrepared = {"rm1", "rm2"}
+
+State 7: <ErrNext line 89, col 5 to line 111, col 33 of module ErrTrace>
+/\ msgs = { [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "working",
+  rm4 |-> "working",
+  rm5 |-> "working",
+  rm6 |-> "working",
+  rm7 |-> "prepared",
+  rm8 |-> "working",
+  rm9 |-> "working" ]
+/\ tmState = "init"
+/\ tmPrepared = {"rm1", "rm2", "rm7"}
+
+State 8: <ErrNext line 89, col 5 to line 111, col 33 of module ErrTrace>
+/\ msgs = { [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"],
+  [theRM |-> "rm8", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "working",
+  rm4 |-> "working",
+  rm5 |-> "working",
+  rm6 |-> "working",
+  rm7 |-> "prepared",
+  rm8 |-> "prepared",
+  rm9 |-> "working" ]
+/\ tmState = "init"
+/\ tmPrepared = {"rm1", "rm2", "rm7"}
+
+State 9: <ErrNext line 89, col 5 to line 111, col 33 of module ErrTrace>
+/\ msgs = { [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"],
+  [theRM |-> "rm8", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "working",
+  rm4 |-> "working",
+  rm5 |-> "working",
+  rm6 |-> "working",
+  rm7 |-> "prepared",
+  rm8 |-> "prepared",
+  rm9 |-> "working" ]
+/\ tmState = "init"
+/\ tmPrepared = {"rm1", "rm2", "rm7", "rm8"}
+
+State 10: <ErrNext line 89, col 5 to line 111, col 33 of module ErrTrace>
+/\ msgs = { [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"],
+  [theRM |-> "rm8", type |-> "Prepared"],
+  [theRM |-> "rm9", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "working",
+  rm4 |-> "working",
+  rm5 |-> "working",
+  rm6 |-> "working",
+  rm7 |-> "prepared",
+  rm8 |-> "prepared",
+  rm9 |-> "prepared" ]
+/\ tmState = "init"
+/\ tmPrepared = {"rm1", "rm2", "rm7", "rm8"}
+
+State 11: <ErrNext line 89, col 5 to line 111, col 33 of module ErrTrace>
+/\ msgs = { [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"],
+  [theRM |-> "rm8", type |-> "Prepared"],
+  [theRM |-> "rm9", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "working",
+  rm4 |-> "working",
+  rm5 |-> "working",
+  rm6 |-> "working",
+  rm7 |-> "prepared",
+  rm8 |-> "prepared",
+  rm9 |-> "prepared" ]
+/\ tmState = "init"
+/\ tmPrepared = {"rm1", "rm2", "rm7", "rm8", "rm9"}
+
+State 12: <ErrNext line 89, col 5 to line 111, col 33 of module ErrTrace>
+/\ msgs = { [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm3", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"],
+  [theRM |-> "rm8", type |-> "Prepared"],
+  [theRM |-> "rm9", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "prepared",
+  rm4 |-> "working",
+  rm5 |-> "working",
+  rm6 |-> "working",
+  rm7 |-> "prepared",
+  rm8 |-> "prepared",
+  rm9 |-> "prepared" ]
+/\ tmState = "init"
+/\ tmPrepared = {"rm1", "rm2", "rm7", "rm8", "rm9"}
+
+State 13: <ErrNext line 89, col 5 to line 111, col 33 of module ErrTrace>
+/\ msgs = { [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm3", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"],
+  [theRM |-> "rm8", type |-> "Prepared"],
+  [theRM |-> "rm9", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "prepared",
+  rm4 |-> "working",
+  rm5 |-> "working",
+  rm6 |-> "working",
+  rm7 |-> "prepared",
+  rm8 |-> "prepared",
+  rm9 |-> "prepared" ]
+/\ tmState = "init"
+/\ tmPrepared = {"rm1", "rm2", "rm3", "rm7", "rm8", "rm9"}
+
+State 14: <ErrNext line 89, col 5 to line 111, col 33 of module ErrTrace>
+/\ msgs = { [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm3", type |-> "Prepared"],
+  [theRM |-> "rm4", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"],
+  [theRM |-> "rm8", type |-> "Prepared"],
+  [theRM |-> "rm9", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "prepared",
+  rm4 |-> "prepared",
+  rm5 |-> "working",
+  rm6 |-> "working",
+  rm7 |-> "prepared",
+  rm8 |-> "prepared",
+  rm9 |-> "prepared" ]
+/\ tmState = "init"
+/\ tmPrepared = {"rm1", "rm2", "rm3", "rm7", "rm8", "rm9"}
+
+State 15: <ErrNext line 89, col 5 to line 111, col 33 of module ErrTrace>
+/\ msgs = { [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm3", type |-> "Prepared"],
+  [theRM |-> "rm4", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"],
+  [theRM |-> "rm8", type |-> "Prepared"],
+  [theRM |-> "rm9", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "prepared",
+  rm4 |-> "prepared",
+  rm5 |-> "working",
+  rm6 |-> "working",
+  rm7 |-> "prepared",
+  rm8 |-> "prepared",
+  rm9 |-> "prepared" ]
+/\ tmState = "init"
+/\ tmPrepared = {"rm1", "rm2", "rm3", "rm4", "rm7", "rm8", "rm9"}
+
+State 16: <ErrNext line 89, col 5 to line 111, col 33 of module ErrTrace>
+/\ msgs = { [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm3", type |-> "Prepared"],
+  [theRM |-> "rm4", type |-> "Prepared"],
+  [theRM |-> "rm5", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"],
+  [theRM |-> "rm8", type |-> "Prepared"],
+  [theRM |-> "rm9", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "prepared",
+  rm4 |-> "prepared",
+  rm5 |-> "prepared",
+  rm6 |-> "working",
+  rm7 |-> "prepared",
+  rm8 |-> "prepared",
+  rm9 |-> "prepared" ]
+/\ tmState = "init"
+/\ tmPrepared = {"rm1", "rm2", "rm3", "rm4", "rm7", "rm8", "rm9"}
+
+State 17: <ErrNext line 89, col 5 to line 111, col 33 of module ErrTrace>
+/\ msgs = { [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm3", type |-> "Prepared"],
+  [theRM |-> "rm4", type |-> "Prepared"],
+  [theRM |-> "rm5", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"],
+  [theRM |-> "rm8", type |-> "Prepared"],
+  [theRM |-> "rm9", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "prepared",
+  rm4 |-> "prepared",
+  rm5 |-> "prepared",
+  rm6 |-> "working",
+  rm7 |-> "prepared",
+  rm8 |-> "prepared",
+  rm9 |-> "prepared" ]
+/\ tmState = "init"
+/\ tmPrepared = {"rm1", "rm2", "rm3", "rm4", "rm5", "rm7", "rm8", "rm9"}
+
+State 18: <ErrNext line 89, col 5 to line 111, col 33 of module ErrTrace>
+/\ msgs = { [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm3", type |-> "Prepared"],
+  [theRM |-> "rm4", type |-> "Prepared"],
+  [theRM |-> "rm5", type |-> "Prepared"],
+  [theRM |-> "rm6", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"],
+  [theRM |-> "rm8", type |-> "Prepared"],
+  [theRM |-> "rm9", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "prepared",
+  rm4 |-> "prepared",
+  rm5 |-> "prepared",
+  rm6 |-> "prepared",
+  rm7 |-> "prepared",
+  rm8 |-> "prepared",
+  rm9 |-> "prepared" ]
+/\ tmState = "init"
+/\ tmPrepared = {"rm1", "rm2", "rm3", "rm4", "rm5", "rm7", "rm8", "rm9"}
+
+State 19: <ErrNext line 89, col 5 to line 111, col 33 of module ErrTrace>
+/\ msgs = { [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm3", type |-> "Prepared"],
+  [theRM |-> "rm4", type |-> "Prepared"],
+  [theRM |-> "rm5", type |-> "Prepared"],
+  [theRM |-> "rm6", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"],
+  [theRM |-> "rm8", type |-> "Prepared"],
+  [theRM |-> "rm9", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "prepared",
+  rm4 |-> "prepared",
+  rm5 |-> "prepared",
+  rm6 |-> "prepared",
+  rm7 |-> "prepared",
+  rm8 |-> "prepared",
+  rm9 |-> "prepared" ]
+/\ tmState = "init"
+/\ tmPrepared = {"rm1", "rm2", "rm3", "rm4", "rm5", "rm6", "rm7", "rm8", "rm9"}
+
+State 20: <ErrNext line 89, col 5 to line 111, col 33 of module ErrTrace>
+/\ msgs = { [type |-> "Commit"],
+  [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm3", type |-> "Prepared"],
+  [theRM |-> "rm4", type |-> "Prepared"],
+  [theRM |-> "rm5", type |-> "Prepared"],
+  [theRM |-> "rm6", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"],
+  [theRM |-> "rm8", type |-> "Prepared"],
+  [theRM |-> "rm9", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "prepared",
+  rm4 |-> "prepared",
+  rm5 |-> "prepared",
+  rm6 |-> "prepared",
+  rm7 |-> "prepared",
+  rm8 |-> "prepared",
+  rm9 |-> "prepared" ]
+/\ tmState = "committed"
+/\ tmPrepared = {"rm1", "rm2", "rm3", "rm4", "rm5", "rm6", "rm7", "rm8", "rm9"}
+
+State 21: <ErrNext line 89, col 5 to line 111, col 33 of module ErrTrace>
+/\ msgs = { [type |-> "Commit"],
+  [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm3", type |-> "Prepared"],
+  [theRM |-> "rm4", type |-> "Prepared"],
+  [theRM |-> "rm5", type |-> "Prepared"],
+  [theRM |-> "rm6", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"],
+  [theRM |-> "rm8", type |-> "Prepared"],
+  [theRM |-> "rm9", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "prepared",
+  rm4 |-> "committed",
+  rm5 |-> "prepared",
+  rm6 |-> "prepared",
+  rm7 |-> "prepared",
+  rm8 |-> "prepared",
+  rm9 |-> "prepared" ]
+/\ tmState = "committed"
+/\ tmPrepared = {"rm1", "rm2", "rm3", "rm4", "rm5", "rm6", "rm7", "rm8", "rm9"}
+
+~/Documents/CMU/tla-decomp-verify/test
+
+
+
+~/Documents/CMU/tla-decomp-verify/test/two_phase/all_msgs_env/two_phase_10 ~/Documents/CMU/tla-decomp-verify/test
+Two Phase Commit (10) (Bug)
+n: 4
+m: 3
+
+Component 1: D0
+State space gen: 11232ms
+LTS gen: 589ms
+# unique states: 255879 states
+minimization: 3962ms
+# unique states post-minimization: 1025 states
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+
+Component 2: D1
+State space gen: 1450ms
+LTS gen: 57ms
+# unique states: 4096 states
+minimization: 404ms
+# unique states post-minimization: 4096 states
+New property gen (|| composition): 5693ms
+
+Component 3: D2
+State space gen: 293ms
+LTS gen: 0ms
+# unique states: 3 states
+minimization: 1ms
+# unique states post-minimization: 3 states
+New property gen (|| composition): 2943ms
+
+Component 4: E2
+State space gen: 111ms
+LTS gen: 3ms
+# unique states: 1024 states
+minimization: 22ms
+# unique states post-minimization: 1024 states
+New property gen (|| composition): 30296ms
+
+Total # states checked: 261002
+Property may be violated.
+Here is the error trace:
+
+Error: Invariant Consistent is violated.
+Error: The behavior up to this point is:
+State 1: <Initial predicate>
+/\ msgs = {}
+/\ rmState = [ rm1 |-> "working",
+  rm2 |-> "working",
+  rm3 |-> "working",
+  rm4 |-> "working",
+  rm5 |-> "working",
+  rm6 |-> "working",
+  rm7 |-> "working",
+  rm8 |-> "working",
+  rm9 |-> "working",
+  rm10 |-> "working" ]
+/\ tmState = "init"
+/\ tmPrepared = {}
+
+State 2: <ErrNext line 89, col 5 to line 113, col 33 of module ErrTrace>
+/\ msgs = {[theRM |-> "rm1", type |-> "Prepared"]}
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "working",
+  rm3 |-> "working",
+  rm4 |-> "working",
+  rm5 |-> "working",
+  rm6 |-> "working",
+  rm7 |-> "working",
+  rm8 |-> "working",
+  rm9 |-> "working",
+  rm10 |-> "working" ]
+/\ tmState = "init"
+/\ tmPrepared = {}
+
+State 3: <ErrNext line 89, col 5 to line 113, col 33 of module ErrTrace>
+/\ msgs = {[theRM |-> "rm1", type |-> "Prepared"]}
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "working",
+  rm3 |-> "working",
+  rm4 |-> "working",
+  rm5 |-> "working",
+  rm6 |-> "working",
+  rm7 |-> "working",
+  rm8 |-> "working",
+  rm9 |-> "working",
+  rm10 |-> "working" ]
+/\ tmState = "init"
+/\ tmPrepared = {"rm1"}
+
+State 4: <ErrNext line 89, col 5 to line 113, col 33 of module ErrTrace>
+/\ msgs = {[theRM |-> "rm1", type |-> "Prepared"], [theRM |-> "rm2", type |-> "Prepared"]}
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "working",
+  rm4 |-> "working",
+  rm5 |-> "working",
+  rm6 |-> "working",
+  rm7 |-> "working",
+  rm8 |-> "working",
+  rm9 |-> "working",
+  rm10 |-> "working" ]
+/\ tmState = "init"
+/\ tmPrepared = {"rm1"}
+
+State 5: <ErrNext line 89, col 5 to line 113, col 33 of module ErrTrace>
+/\ msgs = {[theRM |-> "rm1", type |-> "Prepared"], [theRM |-> "rm2", type |-> "Prepared"]}
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "working",
+  rm4 |-> "working",
+  rm5 |-> "working",
+  rm6 |-> "working",
+  rm7 |-> "working",
+  rm8 |-> "working",
+  rm9 |-> "working",
+  rm10 |-> "working" ]
+/\ tmState = "init"
+/\ tmPrepared = {"rm1", "rm2"}
+
+State 6: <ErrNext line 89, col 5 to line 113, col 33 of module ErrTrace>
+/\ msgs = { [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "working",
+  rm4 |-> "working",
+  rm5 |-> "working",
+  rm6 |-> "working",
+  rm7 |-> "prepared",
+  rm8 |-> "working",
+  rm9 |-> "working",
+  rm10 |-> "working" ]
+/\ tmState = "init"
+/\ tmPrepared = {"rm1", "rm2"}
+
+State 7: <ErrNext line 89, col 5 to line 113, col 33 of module ErrTrace>
+/\ msgs = { [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "working",
+  rm4 |-> "working",
+  rm5 |-> "working",
+  rm6 |-> "working",
+  rm7 |-> "prepared",
+  rm8 |-> "working",
+  rm9 |-> "working",
+  rm10 |-> "working" ]
+/\ tmState = "init"
+/\ tmPrepared = {"rm1", "rm2", "rm7"}
+
+State 8: <ErrNext line 89, col 5 to line 113, col 33 of module ErrTrace>
+/\ msgs = { [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"],
+  [theRM |-> "rm8", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "working",
+  rm4 |-> "working",
+  rm5 |-> "working",
+  rm6 |-> "working",
+  rm7 |-> "prepared",
+  rm8 |-> "prepared",
+  rm9 |-> "working",
+  rm10 |-> "working" ]
+/\ tmState = "init"
+/\ tmPrepared = {"rm1", "rm2", "rm7"}
+
+State 9: <ErrNext line 89, col 5 to line 113, col 33 of module ErrTrace>
+/\ msgs = { [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"],
+  [theRM |-> "rm8", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "working",
+  rm4 |-> "working",
+  rm5 |-> "working",
+  rm6 |-> "working",
+  rm7 |-> "prepared",
+  rm8 |-> "prepared",
+  rm9 |-> "working",
+  rm10 |-> "working" ]
+/\ tmState = "init"
+/\ tmPrepared = {"rm1", "rm2", "rm7", "rm8"}
+
+State 10: <ErrNext line 89, col 5 to line 113, col 33 of module ErrTrace>
+/\ msgs = { [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"],
+  [theRM |-> "rm8", type |-> "Prepared"],
+  [theRM |-> "rm10", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "working",
+  rm4 |-> "working",
+  rm5 |-> "working",
+  rm6 |-> "working",
+  rm7 |-> "prepared",
+  rm8 |-> "prepared",
+  rm9 |-> "working",
+  rm10 |-> "prepared" ]
+/\ tmState = "init"
+/\ tmPrepared = {"rm1", "rm2", "rm7", "rm8"}
+
+State 11: <ErrNext line 89, col 5 to line 113, col 33 of module ErrTrace>
+/\ msgs = { [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"],
+  [theRM |-> "rm8", type |-> "Prepared"],
+  [theRM |-> "rm10", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "working",
+  rm4 |-> "working",
+  rm5 |-> "working",
+  rm6 |-> "working",
+  rm7 |-> "prepared",
+  rm8 |-> "prepared",
+  rm9 |-> "working",
+  rm10 |-> "prepared" ]
+/\ tmState = "init"
+/\ tmPrepared = {"rm1", "rm2", "rm7", "rm8", "rm10"}
+
+State 12: <ErrNext line 89, col 5 to line 113, col 33 of module ErrTrace>
+/\ msgs = { [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"],
+  [theRM |-> "rm8", type |-> "Prepared"],
+  [theRM |-> "rm9", type |-> "Prepared"],
+  [theRM |-> "rm10", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "working",
+  rm4 |-> "working",
+  rm5 |-> "working",
+  rm6 |-> "working",
+  rm7 |-> "prepared",
+  rm8 |-> "prepared",
+  rm9 |-> "prepared",
+  rm10 |-> "prepared" ]
+/\ tmState = "init"
+/\ tmPrepared = {"rm1", "rm2", "rm7", "rm8", "rm10"}
+
+State 13: <ErrNext line 89, col 5 to line 113, col 33 of module ErrTrace>
+/\ msgs = { [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"],
+  [theRM |-> "rm8", type |-> "Prepared"],
+  [theRM |-> "rm9", type |-> "Prepared"],
+  [theRM |-> "rm10", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "working",
+  rm4 |-> "working",
+  rm5 |-> "working",
+  rm6 |-> "working",
+  rm7 |-> "prepared",
+  rm8 |-> "prepared",
+  rm9 |-> "prepared",
+  rm10 |-> "prepared" ]
+/\ tmState = "init"
+/\ tmPrepared = {"rm1", "rm2", "rm7", "rm8", "rm9", "rm10"}
+
+State 14: <ErrNext line 89, col 5 to line 113, col 33 of module ErrTrace>
+/\ msgs = { [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm3", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"],
+  [theRM |-> "rm8", type |-> "Prepared"],
+  [theRM |-> "rm9", type |-> "Prepared"],
+  [theRM |-> "rm10", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "prepared",
+  rm4 |-> "working",
+  rm5 |-> "working",
+  rm6 |-> "working",
+  rm7 |-> "prepared",
+  rm8 |-> "prepared",
+  rm9 |-> "prepared",
+  rm10 |-> "prepared" ]
+/\ tmState = "init"
+/\ tmPrepared = {"rm1", "rm2", "rm7", "rm8", "rm9", "rm10"}
+
+State 15: <ErrNext line 89, col 5 to line 113, col 33 of module ErrTrace>
+/\ msgs = { [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm3", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"],
+  [theRM |-> "rm8", type |-> "Prepared"],
+  [theRM |-> "rm9", type |-> "Prepared"],
+  [theRM |-> "rm10", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "prepared",
+  rm4 |-> "working",
+  rm5 |-> "working",
+  rm6 |-> "working",
+  rm7 |-> "prepared",
+  rm8 |-> "prepared",
+  rm9 |-> "prepared",
+  rm10 |-> "prepared" ]
+/\ tmState = "init"
+/\ tmPrepared = {"rm1", "rm2", "rm3", "rm7", "rm8", "rm9", "rm10"}
+
+State 16: <ErrNext line 89, col 5 to line 113, col 33 of module ErrTrace>
+/\ msgs = { [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm3", type |-> "Prepared"],
+  [theRM |-> "rm4", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"],
+  [theRM |-> "rm8", type |-> "Prepared"],
+  [theRM |-> "rm9", type |-> "Prepared"],
+  [theRM |-> "rm10", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "prepared",
+  rm4 |-> "prepared",
+  rm5 |-> "working",
+  rm6 |-> "working",
+  rm7 |-> "prepared",
+  rm8 |-> "prepared",
+  rm9 |-> "prepared",
+  rm10 |-> "prepared" ]
+/\ tmState = "init"
+/\ tmPrepared = {"rm1", "rm2", "rm3", "rm7", "rm8", "rm9", "rm10"}
+
+State 17: <ErrNext line 89, col 5 to line 113, col 33 of module ErrTrace>
+/\ msgs = { [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm3", type |-> "Prepared"],
+  [theRM |-> "rm4", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"],
+  [theRM |-> "rm8", type |-> "Prepared"],
+  [theRM |-> "rm9", type |-> "Prepared"],
+  [theRM |-> "rm10", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "prepared",
+  rm4 |-> "prepared",
+  rm5 |-> "working",
+  rm6 |-> "working",
+  rm7 |-> "prepared",
+  rm8 |-> "prepared",
+  rm9 |-> "prepared",
+  rm10 |-> "prepared" ]
+/\ tmState = "init"
+/\ tmPrepared = {"rm1", "rm2", "rm3", "rm4", "rm7", "rm8", "rm9", "rm10"}
+
+State 18: <ErrNext line 89, col 5 to line 113, col 33 of module ErrTrace>
+/\ msgs = { [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm3", type |-> "Prepared"],
+  [theRM |-> "rm4", type |-> "Prepared"],
+  [theRM |-> "rm5", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"],
+  [theRM |-> "rm8", type |-> "Prepared"],
+  [theRM |-> "rm9", type |-> "Prepared"],
+  [theRM |-> "rm10", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "prepared",
+  rm4 |-> "prepared",
+  rm5 |-> "prepared",
+  rm6 |-> "working",
+  rm7 |-> "prepared",
+  rm8 |-> "prepared",
+  rm9 |-> "prepared",
+  rm10 |-> "prepared" ]
+/\ tmState = "init"
+/\ tmPrepared = {"rm1", "rm2", "rm3", "rm4", "rm7", "rm8", "rm9", "rm10"}
+
+State 19: <ErrNext line 89, col 5 to line 113, col 33 of module ErrTrace>
+/\ msgs = { [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm3", type |-> "Prepared"],
+  [theRM |-> "rm4", type |-> "Prepared"],
+  [theRM |-> "rm5", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"],
+  [theRM |-> "rm8", type |-> "Prepared"],
+  [theRM |-> "rm9", type |-> "Prepared"],
+  [theRM |-> "rm10", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "prepared",
+  rm4 |-> "prepared",
+  rm5 |-> "prepared",
+  rm6 |-> "working",
+  rm7 |-> "prepared",
+  rm8 |-> "prepared",
+  rm9 |-> "prepared",
+  rm10 |-> "prepared" ]
+/\ tmState = "init"
+/\ tmPrepared = {"rm1", "rm2", "rm3", "rm4", "rm5", "rm7", "rm8", "rm9", "rm10"}
+
+State 20: <ErrNext line 89, col 5 to line 113, col 33 of module ErrTrace>
+/\ msgs = { [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm3", type |-> "Prepared"],
+  [theRM |-> "rm4", type |-> "Prepared"],
+  [theRM |-> "rm5", type |-> "Prepared"],
+  [theRM |-> "rm6", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"],
+  [theRM |-> "rm8", type |-> "Prepared"],
+  [theRM |-> "rm9", type |-> "Prepared"],
+  [theRM |-> "rm10", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "prepared",
+  rm4 |-> "prepared",
+  rm5 |-> "prepared",
+  rm6 |-> "prepared",
+  rm7 |-> "prepared",
+  rm8 |-> "prepared",
+  rm9 |-> "prepared",
+  rm10 |-> "prepared" ]
+/\ tmState = "init"
+/\ tmPrepared = {"rm1", "rm2", "rm3", "rm4", "rm5", "rm7", "rm8", "rm9", "rm10"}
+
+State 21: <ErrNext line 89, col 5 to line 113, col 33 of module ErrTrace>
+/\ msgs = { [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm3", type |-> "Prepared"],
+  [theRM |-> "rm4", type |-> "Prepared"],
+  [theRM |-> "rm5", type |-> "Prepared"],
+  [theRM |-> "rm6", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"],
+  [theRM |-> "rm8", type |-> "Prepared"],
+  [theRM |-> "rm9", type |-> "Prepared"],
+  [theRM |-> "rm10", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "prepared",
+  rm4 |-> "prepared",
+  rm5 |-> "prepared",
+  rm6 |-> "prepared",
+  rm7 |-> "prepared",
+  rm8 |-> "prepared",
+  rm9 |-> "prepared",
+  rm10 |-> "prepared" ]
+/\ tmState = "init"
+/\ tmPrepared = {"rm1", "rm2", "rm3", "rm4", "rm5", "rm6", "rm7", "rm8", "rm9", "rm10"}
+
+State 22: <ErrNext line 89, col 5 to line 113, col 33 of module ErrTrace>
+/\ msgs = { [type |-> "Commit"],
+  [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm3", type |-> "Prepared"],
+  [theRM |-> "rm4", type |-> "Prepared"],
+  [theRM |-> "rm5", type |-> "Prepared"],
+  [theRM |-> "rm6", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"],
+  [theRM |-> "rm8", type |-> "Prepared"],
+  [theRM |-> "rm9", type |-> "Prepared"],
+  [theRM |-> "rm10", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "prepared",
+  rm4 |-> "prepared",
+  rm5 |-> "prepared",
+  rm6 |-> "prepared",
+  rm7 |-> "prepared",
+  rm8 |-> "prepared",
+  rm9 |-> "prepared",
+  rm10 |-> "prepared" ]
+/\ tmState = "committed"
+/\ tmPrepared = {"rm1", "rm2", "rm3", "rm4", "rm5", "rm6", "rm7", "rm8", "rm9", "rm10"}
+
+State 23: <ErrNext line 89, col 5 to line 113, col 33 of module ErrTrace>
+/\ msgs = { [type |-> "Commit"],
+  [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm3", type |-> "Prepared"],
+  [theRM |-> "rm4", type |-> "Prepared"],
+  [theRM |-> "rm5", type |-> "Prepared"],
+  [theRM |-> "rm6", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"],
+  [theRM |-> "rm8", type |-> "Prepared"],
+  [theRM |-> "rm9", type |-> "Prepared"],
+  [theRM |-> "rm10", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "prepared",
+  rm4 |-> "prepared",
+  rm5 |-> "prepared",
+  rm6 |-> "prepared",
+  rm7 |-> "prepared",
+  rm8 |-> "prepared",
+  rm9 |-> "prepared",
+  rm10 |-> "committed" ]
+/\ tmState = "committed"
+/\ tmPrepared = {"rm1", "rm2", "rm3", "rm4", "rm5", "rm6", "rm7", "rm8", "rm9", "rm10"}
+
+~/Documents/CMU/tla-decomp-verify/test
+
+
+
+~/Documents/CMU/tla-decomp-verify/test/two_phase/counter ~/Documents/CMU/tla-decomp-verify/test
+Two Phase Counter (9) (Bug)
+n: 5
+m: 3
+
+Component 1: D0
+State space gen: 3453ms
+LTS gen: 167ms
+# unique states: 78732 states
+minimization: 974ms
+# unique states post-minimization: 513 states
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+
+Component 2: D1
+State space gen: 682ms
+LTS gen: 22ms
+# unique states: 2048 states
+minimization: 226ms
+# unique states post-minimization: 2048 states
+New property gen (|| composition): 1566ms
+
+Component 3: D2
+State space gen: 70ms
+LTS gen: 1ms
+# unique states: 3 states
+minimization: 0ms
+# unique states post-minimization: 3 states
+New property gen (|| composition): 840ms
+
+Component 4: D3
+State space gen: 29ms
+LTS gen: 1ms
+# unique states: 512 states
+minimization: 6ms
+# unique states post-minimization: 512 states
+New property gen (|| composition): 6016ms
+
+Total # states checked: 81295
+Property may be violated.
+Here is the error trace:
+
+Error: Invariant Consistent is violated.
+Error: The behavior up to this point is:
+State 1: <Initial predicate>
+/\ msgs = {}
+/\ rmState = [ rm1 |-> "working",
+  rm2 |-> "working",
+  rm3 |-> "working",
+  rm4 |-> "working",
+  rm5 |-> "working",
+  rm6 |-> "working",
+  rm7 |-> "working",
+  rm8 |-> "working",
+  rm9 |-> "working" ]
+/\ dummy = 0
+/\ tmState = "init"
+/\ tmPrepared = {}
+
+State 2: <ErrNext line 96, col 5 to line 118, col 33 of module ErrTrace>
+/\ msgs = {[theRM |-> "rm1", type |-> "Prepared"]}
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "working",
+  rm3 |-> "working",
+  rm4 |-> "working",
+  rm5 |-> "working",
+  rm6 |-> "working",
+  rm7 |-> "working",
+  rm8 |-> "working",
+  rm9 |-> "working" ]
+/\ dummy = 0
+/\ tmState = "init"
+/\ tmPrepared = {}
+
+State 3: <ErrNext line 96, col 5 to line 118, col 33 of module ErrTrace>
+/\ msgs = {[theRM |-> "rm1", type |-> "Prepared"]}
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "working",
+  rm3 |-> "working",
+  rm4 |-> "working",
+  rm5 |-> "working",
+  rm6 |-> "working",
+  rm7 |-> "working",
+  rm8 |-> "working",
+  rm9 |-> "working" ]
+/\ dummy = 0
+/\ tmState = "init"
+/\ tmPrepared = {"rm1"}
+
+State 4: <ErrNext line 96, col 5 to line 118, col 33 of module ErrTrace>
+/\ msgs = {[theRM |-> "rm1", type |-> "Prepared"], [theRM |-> "rm2", type |-> "Prepared"]}
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "working",
+  rm4 |-> "working",
+  rm5 |-> "working",
+  rm6 |-> "working",
+  rm7 |-> "working",
+  rm8 |-> "working",
+  rm9 |-> "working" ]
+/\ dummy = 0
+/\ tmState = "init"
+/\ tmPrepared = {"rm1"}
+
+State 5: <ErrNext line 96, col 5 to line 118, col 33 of module ErrTrace>
+/\ msgs = {[theRM |-> "rm1", type |-> "Prepared"], [theRM |-> "rm2", type |-> "Prepared"]}
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "working",
+  rm4 |-> "working",
+  rm5 |-> "working",
+  rm6 |-> "working",
+  rm7 |-> "working",
+  rm8 |-> "working",
+  rm9 |-> "working" ]
+/\ dummy = 0
+/\ tmState = "init"
+/\ tmPrepared = {"rm1", "rm2"}
+
+State 6: <ErrNext line 96, col 5 to line 118, col 33 of module ErrTrace>
+/\ msgs = { [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "working",
+  rm4 |-> "working",
+  rm5 |-> "working",
+  rm6 |-> "working",
+  rm7 |-> "prepared",
+  rm8 |-> "working",
+  rm9 |-> "working" ]
+/\ dummy = 0
+/\ tmState = "init"
+/\ tmPrepared = {"rm1", "rm2"}
+
+State 7: <ErrNext line 96, col 5 to line 118, col 33 of module ErrTrace>
+/\ msgs = { [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "working",
+  rm4 |-> "working",
+  rm5 |-> "working",
+  rm6 |-> "working",
+  rm7 |-> "prepared",
+  rm8 |-> "working",
+  rm9 |-> "working" ]
+/\ dummy = 0
+/\ tmState = "init"
+/\ tmPrepared = {"rm1", "rm2", "rm7"}
+
+State 8: <ErrNext line 96, col 5 to line 118, col 33 of module ErrTrace>
+/\ msgs = { [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"],
+  [theRM |-> "rm8", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "working",
+  rm4 |-> "working",
+  rm5 |-> "working",
+  rm6 |-> "working",
+  rm7 |-> "prepared",
+  rm8 |-> "prepared",
+  rm9 |-> "working" ]
+/\ dummy = 0
+/\ tmState = "init"
+/\ tmPrepared = {"rm1", "rm2", "rm7"}
+
+State 9: <ErrNext line 96, col 5 to line 118, col 33 of module ErrTrace>
+/\ msgs = { [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"],
+  [theRM |-> "rm8", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "working",
+  rm4 |-> "working",
+  rm5 |-> "working",
+  rm6 |-> "working",
+  rm7 |-> "prepared",
+  rm8 |-> "prepared",
+  rm9 |-> "working" ]
+/\ dummy = 0
+/\ tmState = "init"
+/\ tmPrepared = {"rm1", "rm2", "rm7", "rm8"}
+
+State 10: <ErrNext line 96, col 5 to line 118, col 33 of module ErrTrace>
+/\ msgs = { [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"],
+  [theRM |-> "rm8", type |-> "Prepared"],
+  [theRM |-> "rm9", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "working",
+  rm4 |-> "working",
+  rm5 |-> "working",
+  rm6 |-> "working",
+  rm7 |-> "prepared",
+  rm8 |-> "prepared",
+  rm9 |-> "prepared" ]
+/\ dummy = 0
+/\ tmState = "init"
+/\ tmPrepared = {"rm1", "rm2", "rm7", "rm8"}
+
+State 11: <ErrNext line 96, col 5 to line 118, col 33 of module ErrTrace>
+/\ msgs = { [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"],
+  [theRM |-> "rm8", type |-> "Prepared"],
+  [theRM |-> "rm9", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "working",
+  rm4 |-> "working",
+  rm5 |-> "working",
+  rm6 |-> "working",
+  rm7 |-> "prepared",
+  rm8 |-> "prepared",
+  rm9 |-> "prepared" ]
+/\ dummy = 0
+/\ tmState = "init"
+/\ tmPrepared = {"rm1", "rm2", "rm7", "rm8", "rm9"}
+
+State 12: <ErrNext line 96, col 5 to line 118, col 33 of module ErrTrace>
+/\ msgs = { [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm3", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"],
+  [theRM |-> "rm8", type |-> "Prepared"],
+  [theRM |-> "rm9", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "prepared",
+  rm4 |-> "working",
+  rm5 |-> "working",
+  rm6 |-> "working",
+  rm7 |-> "prepared",
+  rm8 |-> "prepared",
+  rm9 |-> "prepared" ]
+/\ dummy = 0
+/\ tmState = "init"
+/\ tmPrepared = {"rm1", "rm2", "rm7", "rm8", "rm9"}
+
+State 13: <ErrNext line 96, col 5 to line 118, col 33 of module ErrTrace>
+/\ msgs = { [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm3", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"],
+  [theRM |-> "rm8", type |-> "Prepared"],
+  [theRM |-> "rm9", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "prepared",
+  rm4 |-> "working",
+  rm5 |-> "working",
+  rm6 |-> "working",
+  rm7 |-> "prepared",
+  rm8 |-> "prepared",
+  rm9 |-> "prepared" ]
+/\ dummy = 0
+/\ tmState = "init"
+/\ tmPrepared = {"rm1", "rm2", "rm3", "rm7", "rm8", "rm9"}
+
+State 14: <ErrNext line 96, col 5 to line 118, col 33 of module ErrTrace>
+/\ msgs = { [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm3", type |-> "Prepared"],
+  [theRM |-> "rm4", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"],
+  [theRM |-> "rm8", type |-> "Prepared"],
+  [theRM |-> "rm9", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "prepared",
+  rm4 |-> "prepared",
+  rm5 |-> "working",
+  rm6 |-> "working",
+  rm7 |-> "prepared",
+  rm8 |-> "prepared",
+  rm9 |-> "prepared" ]
+/\ dummy = 0
+/\ tmState = "init"
+/\ tmPrepared = {"rm1", "rm2", "rm3", "rm7", "rm8", "rm9"}
+
+State 15: <ErrNext line 96, col 5 to line 118, col 33 of module ErrTrace>
+/\ msgs = { [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm3", type |-> "Prepared"],
+  [theRM |-> "rm4", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"],
+  [theRM |-> "rm8", type |-> "Prepared"],
+  [theRM |-> "rm9", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "prepared",
+  rm4 |-> "prepared",
+  rm5 |-> "working",
+  rm6 |-> "working",
+  rm7 |-> "prepared",
+  rm8 |-> "prepared",
+  rm9 |-> "prepared" ]
+/\ dummy = 0
+/\ tmState = "init"
+/\ tmPrepared = {"rm1", "rm2", "rm3", "rm4", "rm7", "rm8", "rm9"}
+
+State 16: <ErrNext line 96, col 5 to line 118, col 33 of module ErrTrace>
+/\ msgs = { [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm3", type |-> "Prepared"],
+  [theRM |-> "rm4", type |-> "Prepared"],
+  [theRM |-> "rm5", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"],
+  [theRM |-> "rm8", type |-> "Prepared"],
+  [theRM |-> "rm9", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "prepared",
+  rm4 |-> "prepared",
+  rm5 |-> "prepared",
+  rm6 |-> "working",
+  rm7 |-> "prepared",
+  rm8 |-> "prepared",
+  rm9 |-> "prepared" ]
+/\ dummy = 0
+/\ tmState = "init"
+/\ tmPrepared = {"rm1", "rm2", "rm3", "rm4", "rm7", "rm8", "rm9"}
+
+State 17: <ErrNext line 96, col 5 to line 118, col 33 of module ErrTrace>
+/\ msgs = { [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm3", type |-> "Prepared"],
+  [theRM |-> "rm4", type |-> "Prepared"],
+  [theRM |-> "rm5", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"],
+  [theRM |-> "rm8", type |-> "Prepared"],
+  [theRM |-> "rm9", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "prepared",
+  rm4 |-> "prepared",
+  rm5 |-> "prepared",
+  rm6 |-> "working",
+  rm7 |-> "prepared",
+  rm8 |-> "prepared",
+  rm9 |-> "prepared" ]
+/\ dummy = 0
+/\ tmState = "init"
+/\ tmPrepared = {"rm1", "rm2", "rm3", "rm4", "rm5", "rm7", "rm8", "rm9"}
+
+State 18: <ErrNext line 96, col 5 to line 118, col 33 of module ErrTrace>
+/\ msgs = { [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm3", type |-> "Prepared"],
+  [theRM |-> "rm4", type |-> "Prepared"],
+  [theRM |-> "rm5", type |-> "Prepared"],
+  [theRM |-> "rm6", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"],
+  [theRM |-> "rm8", type |-> "Prepared"],
+  [theRM |-> "rm9", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "prepared",
+  rm4 |-> "prepared",
+  rm5 |-> "prepared",
+  rm6 |-> "prepared",
+  rm7 |-> "prepared",
+  rm8 |-> "prepared",
+  rm9 |-> "prepared" ]
+/\ dummy = 0
+/\ tmState = "init"
+/\ tmPrepared = {"rm1", "rm2", "rm3", "rm4", "rm5", "rm7", "rm8", "rm9"}
+
+State 19: <ErrNext line 96, col 5 to line 118, col 33 of module ErrTrace>
+/\ msgs = { [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm3", type |-> "Prepared"],
+  [theRM |-> "rm4", type |-> "Prepared"],
+  [theRM |-> "rm5", type |-> "Prepared"],
+  [theRM |-> "rm6", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"],
+  [theRM |-> "rm8", type |-> "Prepared"],
+  [theRM |-> "rm9", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "prepared",
+  rm4 |-> "prepared",
+  rm5 |-> "prepared",
+  rm6 |-> "prepared",
+  rm7 |-> "prepared",
+  rm8 |-> "prepared",
+  rm9 |-> "prepared" ]
+/\ dummy = 0
+/\ tmState = "init"
+/\ tmPrepared = {"rm1", "rm2", "rm3", "rm4", "rm5", "rm6", "rm7", "rm8", "rm9"}
+
+State 20: <ErrNext line 96, col 5 to line 118, col 33 of module ErrTrace>
+/\ msgs = { [type |-> "Commit"],
+  [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm3", type |-> "Prepared"],
+  [theRM |-> "rm4", type |-> "Prepared"],
+  [theRM |-> "rm5", type |-> "Prepared"],
+  [theRM |-> "rm6", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"],
+  [theRM |-> "rm8", type |-> "Prepared"],
+  [theRM |-> "rm9", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "prepared",
+  rm4 |-> "prepared",
+  rm5 |-> "prepared",
+  rm6 |-> "prepared",
+  rm7 |-> "prepared",
+  rm8 |-> "prepared",
+  rm9 |-> "prepared" ]
+/\ dummy = 0
+/\ tmState = "committed"
+/\ tmPrepared = {"rm1", "rm2", "rm3", "rm4", "rm5", "rm6", "rm7", "rm8", "rm9"}
+
+State 21: <ErrNext line 96, col 5 to line 118, col 33 of module ErrTrace>
+/\ msgs = { [type |-> "Commit"],
+  [theRM |-> "rm1", type |-> "Prepared"],
+  [theRM |-> "rm2", type |-> "Prepared"],
+  [theRM |-> "rm3", type |-> "Prepared"],
+  [theRM |-> "rm4", type |-> "Prepared"],
+  [theRM |-> "rm5", type |-> "Prepared"],
+  [theRM |-> "rm6", type |-> "Prepared"],
+  [theRM |-> "rm7", type |-> "Prepared"],
+  [theRM |-> "rm8", type |-> "Prepared"],
+  [theRM |-> "rm9", type |-> "Prepared"] }
+/\ rmState = [ rm1 |-> "prepared",
+  rm2 |-> "prepared",
+  rm3 |-> "prepared",
+  rm4 |-> "committed",
+  rm5 |-> "prepared",
+  rm6 |-> "prepared",
+  rm7 |-> "prepared",
+  rm8 |-> "prepared",
+  rm9 |-> "prepared" ]
+/\ dummy = 0
+/\ tmState = "committed"
+/\ tmPrepared = {"rm1", "rm2", "rm3", "rm4", "rm5", "rm6", "rm7", "rm8", "rm9"}
+
+~/Documents/CMU/tla-decomp-verify/test
+
+
+
